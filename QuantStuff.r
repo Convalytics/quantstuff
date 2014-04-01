@@ -23,7 +23,7 @@ chartSeries(last(mySymbol,dayRange),
 addBBands()
 addMACD()
 
-
+chartStock("XLK","90")
 #My Indicators
 # not used: addTA(LoHi(last(mySymbol,dayRange)))
 #Absolute daysBody <- abs(AUY$AUY.Close - AUY$AUY.Open)  # Body Size

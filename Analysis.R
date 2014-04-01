@@ -1,5 +1,9 @@
 library('quantmod')
-
+library('knitr')
+#library('zoo')
+#library('xts')
+#library('PerformanceAnalytics')
+setwd("~/GitHub/quantstuff")
 ######################################################
 chartStock <- function(a,b){
    mySymbol <- toupper(a)
@@ -11,7 +15,7 @@ chartStock <- function(a,b){
       getSymbols(mySymbol,src="yahoo")
    }
    
-   #    todayQuote <- getQuote(mySymbol, what=yahooQuote.EOD)
+    #    todayQuote <- getQuote(mySymbol, what=yahooQuote.EOD)
    myStock <- eval(parse(text=mySymbol))
    
    chartSeries(last(myStock,dayRange),
@@ -24,10 +28,24 @@ chartStock <- function(a,b){
    addBBands()
    addTA(BBands(Cl(myStock))$pctB)
    #addMACD()
-   #####  todayQuote
+ #####  todayQuote
 }
 ########################################################
 
-chartStock("aapl","150")
+### Symbol groups
+techSector <- c("XLK","AAPL","GOOG","MSFT","VZ","IBM","T","ORCL","QCOM","CSCO","INTC","V","FB","MA","EBAY","EMC","TXN","ACN","HPQ","ADP","YHOO","CRM")
 
-###################################################
+# Load a bunch of symbols at once:
+getSymbols(techSector,src="yahoo")
+#loadSymbols <- c("XPH","XBI","IHF","IHI","JO","MSFT")
+##########################################################
+# Run everything above to initialize
+##########################################################
+
+
+chartStock("amzn","300")
+chartStock("fb","60")
+chartStock("fb","90")
+chartStock("fb","180")
+
+
