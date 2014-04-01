@@ -78,13 +78,13 @@ chartStock <- function(a,b){
 ### End Functions
 #################
 
-stocklist<-c("AUY","XLK","AAPL","GOOG","MSFT","VZ","IBM","T","ORCL","QCOM","CSCO","INTC","V","FB",
-             "MA","EBAY","EMC","TXN","ACN","HPQ","ADP","YHOO","CRM",
-             "CTSH","ADBE","GLW","AMAT","MU","TEL","INTU","CTL","SNDK","WDC","STX","ADI","BRCM",
-             "FIX","APH","XLNX","FISV","NTAP","KLAC","ALTR","ADSK","LLTC","AKAM","CTXS",
-             "RHT","CA","NVDA","MCHP","EA","CSC","WU","LRCX","HRS","TDC","FFIV","VRSN","FTR","FLIR","TSS","WIN","FSLR","JBL"
-             )
-
+# stocklist<-c("AUY","XLK","AAPL","GOOG","MSFT","VZ","IBM","T","ORCL","QCOM","CSCO","INTC","V","FB",
+#              "MA","EBAY","EMC","TXN","ACN","HPQ","ADP","YHOO","CRM",
+#              "CTSH","ADBE","GLW","AMAT","MU","TEL","INTU","CTL","SNDK","WDC","STX","ADI","BRCM",
+#              "FIX","APH","XLNX","FISV","NTAP","KLAC","ALTR","ADSK","LLTC","AKAM","CTXS",
+#              "RHT","CA","NVDA","MCHP","EA","CSC","WU","LRCX","HRS","TDC","FFIV","VRSN","FTR","FLIR","TSS","WIN","FSLR","JBL"
+#              )
+stocklist<-c("AUY","FB")
 # Use the quantmod function to get all of the stock data properly.
 getSymbols(stocklist,src="yahoo")
 
@@ -93,4 +93,4 @@ getSymbols(stocklist,src="yahoo")
 bbscan(stocklist)
 
 # Chart to see what's going on.
-chartStock("FLIR",60)
+chartStock("FB",60)
