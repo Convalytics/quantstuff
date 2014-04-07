@@ -8,8 +8,8 @@ techSector <- c("XLK","AAPL","GOOG","MSFT","VZ","IBM","T","ORCL","QCOM","CSCO","
 
 getSymbols(techSector,src="yahoo")
 
-mySymbol <- XLK
-dayRange <- 180
+mySymbol <- AUY
+dayRange <- 90
 
 #candleChart(last(mySymbol,dayRange),dn.col="black",up.col="white",theme="white")
 chartSeries(last(mySymbol,dayRange),

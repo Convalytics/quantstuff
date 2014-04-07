@@ -1,0 +1,176 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[nohyper,justified]{tufte-handout}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle, bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2, breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=false] {hyperref}
+\hypersetup{pdfstartview=FitH}
+\usepackage{breakurl}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+
+\title{Performance Reporting with knitr}
+\author{Timely Portfolio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+\begin{document}
+
+% \SweaveOpts{fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='pdf', fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, par=TRUE}
+
+
+
+
+\maketitle
+\begin{abstract}
+This sample performance report will begin to highlight the ability of the \textbf{knitr} package to generate marketing materials and client-facing performance reports with a little help from the \textbf{PerformanceAnalytics} package.
+\end{abstract}
+Thanks again to Yihui Xie for not only his amazing \textbf{knitr} work but also his numerous examples.  His {\url{http://yihui.name/knitr/demo/graphics/} (\textbf{knitr Graphics Manual}) will provide the initial template for this report.  As I learn, hopefully I will not have to mimic his example so closely.
+                                                                                                             
+                                                                                                             
+                                                                                                             \section{Performance Summary}
+                                                                                                             
+                                                                                                             For this first example we will use the prebuilt \textbf{charts.PerformanceSummary} function to visualize cumulative growth and drawdown of the EDHEC style indexes provided by data(edhec).  Although \textbf{charts.PerformanceSummary} was primarily intended as an example or template, I hear that it has appeared unadulterated in live performance reports and marketing.
+                                                                                                             
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{require}\hlstd{(PerformanceAnalytics)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: there is no package called 'PerformanceAnalytics'}}\begin{alltt}
+\hlkwd{data}\hlstd{(edhec)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: data set 'edhec' not found}}\end{kframe}
+\end{knitrout}
+
+                                                                                                             \begin{figure}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{charts.PerformanceSummary}\hlstd{(edhec,} \hlkwc{main} \hlstd{=} \hlstr{"Performance of EDHEC Style Indexes"}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: could not find function "{}charts.PerformanceSummary"{}}}\end{kframe}
+\end{knitrout}
+
+                                                                                                             \caption{\textbf{charts.PerformanceSummary} provides a nice chart of my favorite measures: compounded return and drawdown.\label{fig:perf}}
+                                                                                                             \end{figure}
+                                                                                                             
+                                                                                                             \newpage
+                                                                                                             \section{Improvement??}
+                                                                                                             With a little help from \textbf{lattice} and \textbf{latticeExtra}, maybe we can get something that might fit my style a little better.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{require}\hlstd{(lattice)}
+\hlkwd{require}\hlstd{(latticeExtra)}
+\hlkwd{require}\hlstd{(reshape2)}
+\hlcom{# get cumulative growth of $1}
+\hlstd{edhec.cumul} \hlkwb{<-} \hlkwd{apply}\hlstd{(edhec} \hlopt{+} \hlnum{1}\hlstd{,} \hlkwc{MARGIN} \hlstd{=} \hlnum{2}\hlstd{, cumprod)}
+\hlcom{# use melt so we can get in a format lattice or ggplot2 likes}
+\hlstd{edhec.cumul.melt} \hlkwb{<-} \hlkwd{melt}\hlstd{(}\hlkwd{as.data.frame}\hlstd{(}\hlkwd{cbind}\hlstd{(}\hlkwd{index}\hlstd{(edhec), edhec.cumul)),}
+    \hlkwc{id.vars} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlcom{# name columns something more appropriate}
+\hlkwd{colnames}\hlstd{(edhec.cumul.melt)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Date"}\hlstd{,} \hlstr{"Style"}\hlstd{,} \hlstr{"Growth"}\hlstd{)}
+\hlcom{# get dates in text form}
+\hlstd{edhec.cumul.melt[,} \hlnum{1}\hlstd{]} \hlkwb{<-} \hlkwd{as.Date}\hlstd{(edhec.cumul.melt[,} \hlnum{1}\hlstd{])}
+\hlstd{colors} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlkwd{brewer.pal}\hlstd{(}\hlnum{9}\hlstd{,} \hlkwc{name} \hlstd{=} \hlstr{"PuBuGn"}\hlstd{)[}\hlnum{3}\hlopt{:}\hlnum{9}\hlstd{],} \hlkwd{brewer.pal}\hlstd{(}\hlnum{9}\hlstd{,}
+    \hlstr{"YlOrRd"}\hlstd{)[}\hlnum{4}\hlopt{:}\hlnum{9}\hlstd{])}
+\hlcom{# plot with lattice}
+\hlkwd{xyplot}\hlstd{(Growth} \hlopt{~} \hlstd{Date,} \hlkwc{groups} \hlstd{= Style,} \hlkwc{data} \hlstd{= edhec.cumul.melt,}
+    \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{,} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{col} \hlstd{= colors,} \hlkwc{par.settings} \hlstd{=} \hlkwd{theEconomist.theme}\hlstd{(}\hlkwc{box} \hlstd{=} \hlstr{"transparent"}\hlstd{),}
+    \hlkwc{axis} \hlstd{= theEconomist.axis,} \hlkwc{scales} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwc{alternating} \hlstd{=} \hlnum{1}\hlstd{),}
+        \hlkwc{y} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwc{alternating} \hlstd{=} \hlnum{1}\hlstd{)),} \hlkwc{main} \hlstd{=} \hlstr{"Cumulative Growth of EDHEC Style Indexes"}\hlstd{)} \hlopt{+}
+    \hlkwd{layer}\hlstd{(}\hlkwd{panel.text}\hlstd{(}\hlkwc{x} \hlstd{=} \hlkwd{as.Date}\hlstd{(}\hlkwd{index}\hlstd{(edhec)[}\hlkwd{NROW}\hlstd{(edhec)]} \hlopt{-}
+        \hlnum{1}\hlstd{),} \hlkwc{y} \hlstd{=} \hlkwd{round}\hlstd{(edhec.cumul[}\hlkwd{NROW}\hlstd{(edhec.cumul), ],} \hlnum{2}\hlstd{),} \hlkwd{colnames}\hlstd{(edhec),}
+        \hlkwc{pos} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{cex} \hlstd{=} \hlnum{0.8}\hlstd{,} \hlkwc{col} \hlstd{= colors))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+                                                                                                             \begin{figure}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: lattice\\\#\# Loading required package: latticeExtra\\\#\# Loading required package: RColorBrewer\\\#\# \\\#\# Attaching package: 'latticeExtra'\\\#\# \\\#\# The following object is masked from 'package:ggplot2':\\\#\# \\\#\#\ \ \ \  layer\\\#\# \\\#\# Loading required package: reshape2}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'edhec' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'edhec' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'edhec.cumul.melt' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'edhec.cumul.melt' not found}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'edhec.cumul.melt' not found}}\end{kframe}
+\end{knitrout}
+
+                                                                                                             
+                                                                                                             \caption{Still a mess but definitely closer to what I expect for production quality reporting.  Keep following.  I will get better.\label{fig:perf}}
+                                                                                                             \end{figure}
+                                                                                                             \end{document}

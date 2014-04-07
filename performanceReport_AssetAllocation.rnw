@@ -1,0 +1,26 @@
+%#######################################################
+%# KNITR Report Template - Dynamic Equity Bond Allocation
+%#
+%# thertrader@gmail.com - Oct 2013
+%#######################################################
+
+\documentclass{article}
+\title{Dynamic Equity vs. Bond Allocation \\ Performance Report}
+\usepackage[top=0.1in, bottom=0.1in, left=1in, right=1in]{geometry}
+\usepackage[labelformat=empty]{caption} % remove table 1 etc...
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\date{\vspace{-5ex}} % remove date & suppress the space that goes with it
+\maketitle
+
+<<fooa,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.width=7.5,fig.height=5.5,results="asis">>= 
+   source("C:\\Users\\jgreen\\Documents\\GitHub\\quantstuff\\performanceReportWithKnitr.R")
+
+performanceReport(inputPath="your_path",
+                  inputFile="debaUS.csv",
+                  keepColumns=c("date","optimAlloc..."))
+
+@
+
+\end{document}

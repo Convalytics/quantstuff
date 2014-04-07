@@ -1,0 +1,87 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[nohyper,justified]{tufte-handout}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle, bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2, breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=false] {hyperref}
+\hypersetup{pdfstartview=FitH}
+\usepackage{breakurl}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+
+\title{Performance Reporting with knitr}
+\author{Timely Portfolio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+
+\makeatother
+
+\begin{document}
+
+% \SweaveOpts{fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='pdf', fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, par=TRUE}
+
+<<setup, include=FALSE, cache=FALSE>>=
+   options(replace.assign=TRUE,width=60)
+@
+
+\maketitle
+\begin{abstract}
+This sample performance report will begin to highlight the ability of the \textbf{knitr} package to generate marketing materials and client-facing performance reports with a little help from the \textbf{PerformanceAnalytics} package.
+\end{abstract}
+Thanks again to Yihui Xie for not only his amazing \textbf{knitr} work but also his numerous examples.  His {\url{http://yihui.name/knitr/demo/graphics/} (\textbf{knitr Graphics Manual}) will provide the initial template for this report.  As I learn, hopefully I will not have to mimic his example so closely.
+                                                                                                             
+                                                                                                             
+                                                                                                             \section{Performance Summary}
+                                                                                                             
+                                                                                                             For this first example we will use the prebuilt \textbf{charts.PerformanceSummary} function to visualize cumulative growth and drawdown of the EDHEC style indexes provided by data(edhec).  Although \textbf{charts.PerformanceSummary} was primarily intended as an example or template, I hear that it has appeared unadulterated in live performance reports and marketing.
+                                                                                                             
+                                                                                                             <<loadlibrary, eval=TRUE, results='hide', message=FALSE>>=
+                                                                                                                require(PerformanceAnalytics)
+                                                                                                             data(edhec)
+                                                                                                             @
+                                                                                                             \begin{figure}
+                                                                                                             <<perf, fig.width=8, fig.height=8, out.width='.9\\linewidth',dev='pdf',echo=TRUE,warning=FALSE>>=
+                                                                                                                charts.PerformanceSummary(edhec,main="Performance of EDHEC Style Indexes")
+                                                                                                             @
+                                                                                                             \caption{\textbf{charts.PerformanceSummary} provides a nice chart of my favorite measures: compounded return and drawdown.\label{fig:perf}}
+                                                                                                             \end{figure}
+                                                                                                             
+                                                                                                             \newpage
+                                                                                                             \section{Improvement??}
+                                                                                                             With a little help from \textbf{lattice} and \textbf{latticeExtra}, maybe we can get something that might fit my style a little better.
+                                                                                                             <<perfbetter, eval=FALSE, warning=FALSE>>=
+                                                                                                                require(lattice)
+                                                                                                             require(latticeExtra)
+                                                                                                             require(reshape2)
+                                                                                                             #get cumulative growth of $1
+                                                                                                             edhec.cumul <- apply(edhec+1,MARGIN=2,cumprod)
+                                                                                                             #use melt so we can get in a format lattice or ggplot2 likes
+                                                                                                             edhec.cumul.melt <- melt(as.data.frame(cbind(index(edhec),edhec.cumul)),id.vars=1)
+                                                                                                             #name columns something more appropriate
+                                                                                                             colnames(edhec.cumul.melt) <- c("Date","Style","Growth")
+                                                                                                             #get dates in text form
+                                                                                                             edhec.cumul.melt[,1] <- as.Date(edhec.cumul.melt[,1])
+                                                                                                             colors <- c(brewer.pal(9,name="PuBuGn")[3:9],brewer.pal(9,"YlOrRd")[4:9])
+                                                                                                             #plot with lattice
+                                                                                                             xyplot(Growth~Date,groups=Style,data=edhec.cumul.melt,
+                                                                                                                    type="l",lwd=2,col=colors,
+                                                                                                                    par.settings=theEconomist.theme(box="transparent"),
+                                                                                                                    axis = theEconomist.axis,
+                                                                                                                    scales=list(x=list(alternating=1),
+                                                                                                                                y=list(alternating=1)),
+                                                                                                                    main="Cumulative Growth of EDHEC Style Indexes")+           layer(panel.text(x=as.Date(index(edhec)[NROW(edhec)]-1),y=round(edhec.cumul[NROW(edhec.cumul),],2),colnames(edhec),pos=0,cex=0.8,col=colors))
+                                                                                                             @
+                                                                                                             \begin{figure}
+                                                                                                             <<latticeperf,ref.label='perfbetter', fig.width=8, fig.height=8, out.width='.9\\linewidth',dev='pdf',echo=FALSE,warning=FALSE>>=
+                                                                                                                @
+                                                                                                             
+                                                                                                             \caption{Still a mess but definitely closer to what I expect for production quality reporting.  Keep following.  I will get better.\label{fig:perf}}
+                                                                                                             \end{figure}
+                                                                                                             \end{document}
