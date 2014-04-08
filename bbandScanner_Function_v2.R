@@ -1,4 +1,4 @@
-install.packages("PerformanceAnalytics")
+#install.packages("PerformanceAnalytics")
 library(quantmod)
 library(PerformanceAnalytics)
 setwd("~/GitHub/quantstuff")
@@ -6,7 +6,7 @@ setwd("~/GitHub/quantstuff")
 bbandScanner <- function(a){
    
    mySymbol <- toupper(a)
-   print(mySymbol)
+   #print(mySymbol)
    
    # If the quote object doesn't exist. Get it from Yahoo.
    # If it already exists, this code will be skipped.
@@ -119,13 +119,15 @@ getSymbols(stocklist,src="yahoo")
 
 
 # Scan for buy/sell signals based on Bollinger Bands
-bbscan(stocklist)
+scanned <- bbscan(stocklist)
+subset(scanned, signal!="-")
 
 # Chart to see what's going on.
-chartStock("AUY",120)
+chartStock("EBAY",60)
 addGuppy()
 addRSI()
-
+addMACD()
+addADX()
 
 plot(Return.calculate(last(AUY$AUY.Close,180),method="compound"))
 
