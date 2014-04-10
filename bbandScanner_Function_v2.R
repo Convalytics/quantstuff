@@ -6,23 +6,18 @@ setwd("~/GitHub/quantstuff")
 bbandScanner <- function(a){
    
    mySymbol <- toupper(a)
-   #print(mySymbol)
-   
-   # If the quote object doesn't exist. Get it from Yahoo.
-   # If it already exists, this code will be skipped.
-#    if(exists(mySymbol)==F) {
-#       getSymbols(mySymbol,src="yahoo")
-#    }
    
    myStock <- eval(parse(text=mySymbol))
    
    bands <- BBands(Cl(myStock))$pctB
+   bands$rsi <- RSI(Ad(myStock))
+   bands$Close <- Ad(myStock)
    bands <- tail(bands, n=1)
    bands$signal <- NA
    bands$signal <- ifelse(bands$pctB > 1, "Sell",
                ifelse(bands$pctB < 0,"Buy",
                  "-"))
-   
+      
    return(bands)
 
    
@@ -30,20 +25,24 @@ bbandScanner <- function(a){
    ########################################################
 
 #### bbscan function ###############################################
-bbscan <- function(stocklist){
+bbscan <- function(stocks){
 #stocklist<-c("XLK","AAPL","GOOG","MSFT","VZ","IBM","T","ORCL","QCOM","CSCO","INTC","V","FB","MA","EBAY","EMC","TXN","ACN","HPQ","ADP","YHOO","CRM")
 ##getSymbols(stocklist,src="yahoo")
 
-signalList <- as.data.frame(matrix(NA,nrow=0,ncol=3))
-names(signalList) <- c("stock","pctB","signal")
+signalList <- as.data.frame(matrix(NA,nrow=0,ncol=5))
+names(signalList) <- c("stock","Close","rsi","pctB","signal")
 
-for(i in 1:length(stocklist)){
-testgrab <- bbandScanner(stocklist[i])
-signalList[i,"stock"]<-stocklist[i]
-signalList[i,"pctB"]<-testgrab$pctB
-signalList[i,"signal"]<-testgrab$signal
+stocks <- "AAPL"
+for(i in 1:length(stocks)){
+testgrab <- bbandScanner(stocks[i])
+signalList[i,"stock"] <- stocks[i]
+signalList[i,"Close"] <- testgrab$Close
+signalList[i,"rsi"]<- testgrab$rsi
+signalList[i,"pctB"]<- testgrab$pctB
+signalList[i,"signal"] <- testgrab$signal
+
+
 }
-signalList
 }
 #############################################################################
 #############################################################################
@@ -124,6 +123,7 @@ metals <- c("JJT","JJN","LD","JJU","JJC","GLD","SLV","PALL","PPLT","JJM","WITE")
 countries <- c("EWI","EGPT","EWP","EIRL","EWG","EWQ","EWN","EWK","EIS","EWL","ARGT","PLND","EWU","EWO","EWY","EWT")    #TMW
 currencies <- c("FXB","FXF","FXE","UUP","FXS","CYB","ICN","FXY","FXC","FXA","BZF")   #, SZR
 sectors_US <- c("XLI","XLV","XLB","XLY","XLK","XLF","XLE","XLP","XLU")
+leveragedETFs <- c("TNA","SSO","UPRO","FAS","QLD","ERX","UWM","AGQ","DDM","UST","VIX")
 
 stocklist <- c(keyMarkets_US,
                tech,
@@ -135,9 +135,9 @@ stocklist <- c(keyMarkets_US,
                metals,
                countries,
                currencies,
-               sectors_US)
+               sectors_US,
+               leveragedETFs)
 
-stocklist <- metals
 stocklist <- stocklist[!duplicated(stocklist)]  # remove duplicates
 
 #stocklist<-c("FB","AUY","XLK")
@@ -146,7 +146,7 @@ getSymbols(stocklist,src="yahoo", warnings = FALSE)
 
 
 # Scan for buy/sell signals based on Bollinger Bands
-scanned <- bbscan(stocklist)
+scanned <- bbscan("OIL")
 subset(scanned, signal!="-")
 
 # Chart to see what's going on.
@@ -157,26 +157,26 @@ addRSI()
 addMACD()
 addADX()
 
-plot(Return.calculate(last(AUY$AUY.Close,180),method="compound"))
+#plot(Return.calculate(last(AUY$AUY.Close,180),method="compound"))
 
 
-chart.CumReturns(managers[,c(manager.column, index.columns, 
-                             peer.columns), drop = FALSE], main = 'Cumulative Returns', 
-                 legend.loc = 'topleft', event.lines = risk.dates, event.labels = 
-                    risk.labels, ylog = TRUE, wealth.index = TRUE, colorset = colorset, 
-                 lwd = 2)
-
-#????? getOptionChain("AAPL")
-#????? buildData(BBands(Cl(XLK)))
-
-
-
-#candleChart(AUY,subset="2014", theme="white");addGuppy()
-#addGuppy(on=-1, col=c(rep("blue",6),rep("black",6)))
-
-
-test <- as.xts(merge(AUY,BBands(Cl(AUY))$pctB))
-test$RSI <- as.xts(RSI(Cl(AUY)))
-
-
-RSI(Cl(AUY))
+# chart.CumReturns(managers[,c(manager.column, index.columns, 
+#                              peer.columns), drop = FALSE], main = 'Cumulative Returns', 
+#                  legend.loc = 'topleft', event.lines = risk.dates, event.labels = 
+#                     risk.labels, ylog = TRUE, wealth.index = TRUE, colorset = colorset, 
+#                  lwd = 2)
+# # 
+# # #????? getOptionChain("AAPL")
+# # #????? buildData(BBands(Cl(XLK)))
+# 
+# 
+# 
+# #candleChart(AUY,subset="2014", theme="white");addGuppy()
+# #addGuppy(on=-1, col=c(rep("blue",6),rep("black",6)))
+# 
+# 
+# test <- as.xts(merge(AUY,BBands(Cl(AUY))$pctB))
+# test$RSI <- as.xts(RSI(Cl(AUY)))
+# 
+# 
+# RSI(Cl(AUY))

@@ -7,21 +7,17 @@ source(file="StockAnalysisFunctions.R")
 ######################################################################################
 ############# SCAN ALL STOCKS ########################################################
 
-scanned <- bbscan(stocklist)
-subset(scanned, signal!="-")
-
+scanned <- scanner(stocklist)
 
 ############# GET STOCK DETAILS ########################################################
-mySymbol <- "OIL"
-days <- 120
+mySymbol <- "UST"
+days <- 200
 myStock <- eval(parse(text=mySymbol))
+#tail(BBands(Cl(ERX)))
 
-
-thisStock <- getSignals(mySymbol, days, myStock)
-tail(thisStock)
-
+#chartSeries(last(ERX,60))
 ############# CHART THE SELECTED STOCK ########################################################
-getChart(mySymbol,days,thisStock)
+getChart(mySymbol,days,myStock)
 addEMA(n=3)
 addEMA(n=30)
 addBBands()
