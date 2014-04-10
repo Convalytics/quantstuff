@@ -57,9 +57,10 @@ getChart <- function(sym,rng,dta){
    }
    ######################################################################
 #########################################################################
-getSymbols("AAPL",src="yahoo", warnings = FALSE)
+myFaves <- c("TNA","SSO","UPRO","FAS","QLD","ERX","UWM","AGQ","DDM","UST","VIX")
+getSymbols(myFaves,src="yahoo", warnings = FALSE)
 
-mySymbol <- "AAPL"
+mySymbol <- "DDM"
 days <- 120
 myStock <- eval(parse(text=mySymbol))
 #head(myStock)
