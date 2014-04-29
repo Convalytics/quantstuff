@@ -25,19 +25,20 @@ currencies <- c("FXB","FXF","FXE","UUP","FXS","CYB","ICN","FXY","FXC","FXA","BZF
 sectors_US <- c("XLI","XLV","XLB","XLY","XLK","XLF","XLE","XLP","XLU")
 leveragedETFs <- c("TNA","SSO","UPRO","FAS","QLD","ERX","UWM","AGQ","DDM","UST","VIX")
 currentHoldings <- c("AUY","XLK","INTU")
-# stocklist <- c(keyMarkets_US,
-#                tech,
-#                keyMarkets_Global,
-#                keyMarkets_Bonds,
-#                keyMarkets_Commodities,
-#                keyMarkets_Currencies,
-#                agriculture,
-#                metals,
-#                countries,
-#                currencies,
-#                sectors_US,
-#                leveragedETFs)
-stocklist <- c(leveragedETFs, currentHoldings)
+stocklist <- c(keyMarkets_US,
+               tech,
+               keyMarkets_Global,
+               keyMarkets_Bonds,
+               keyMarkets_Commodities,
+               keyMarkets_Currencies,
+               agriculture,
+               metals,
+               countries,
+               currencies,
+               sectors_US,
+               leveragedETFs,
+               currentHoldings)
+#stocklist <- c(leveragedETFs, currentHoldings)
 stocklist <- stocklist[!duplicated(stocklist)]  # remove duplicates
 
 #stocklist<-c("FB","AUY","XLK")

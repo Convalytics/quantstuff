@@ -1,0 +1,16 @@
+{
+    "contents" : "### Stock Lists\n\nsetwd(\"~/GitHub/quantstuff/quantProject\")\n\nlibrary(quantmod)\n\n######################################################################################\n\ntech<-c(\"XLK\",\"AAPL\",\"MSFT\",\"VZ\",\"IBM\",\"ORCL\",\"QCOM\",\"CSCO\",\"INTC\",\"V\",\"FB\",\n        \"MA\",\"EBAY\",\"EMC\",\"TXN\",\"ACN\",\"HPQ\",\"ADP\",\"YHOO\",\"CRM\",\n        \"CTSH\",\"ADBE\",\"GLW\",\"AMAT\",\"MU\",\"TEL\",\"INTU\",\"CTL\",\"SNDK\",\"WDC\",\"STX\",\"ADI\",\"BRCM\",\n        \"FIX\",\"APH\",\"XLNX\",\"FISV\",\"NTAP\",\"KLAC\",\"ALTR\",\"ADSK\",\"LLTC\",\"AKAM\",\"CTXS\",\n        \"RHT\",\"CA\",\"NVDA\",\"MCHP\",\"EA\",\"CSC\",\"WU\",\"LRCX\",\"HRS\",\"TDC\",\"FFIV\",\"VRSN\",\"FTR\",\"FLIR\",\"TSS\",\"WIN\",\"FSLR\",\"JBL\"                      \n)\n\nkeyMarkets_US <- c(\"IWC\",\"SLY\",\"SPY\",\"DIA\")   # EMM\nkeyMarkets_Global <- c(\"ACWI\",\"EFA\",\"CWI\",\"GMM\",\"BIK\")\nkeyMarkets_Bonds <- c(\"BWX\",\"JNK\",\"LAG\",\"IPE\",\"TLT\")\nkeyMarkets_Commodities <- c(\"OIL\",\"JJA\",\"PTM\",\"JJM\",\"GLD\",\"SLV\",\"GAZ\",\"PALL\",\"PPLT\")\nkeyMarkets_Currencies <- c(\"UUP\",\"FXE\",\"FXB\",\"CYB\",\"FXY\")\nagriculture <- c(\"JO\",\"NIB\",\"COW\",\"FUE\",\"BAL\",\"JJG\",\"SGG\",\"CORN\",\"JJA\")\nmetals <- c(\"JJT\",\"JJN\",\"LD\",\"JJU\",\"JJC\",\"GLD\",\"SLV\",\"PALL\",\"PPLT\",\"JJM\",\"WITE\")\ncountries <- c(\"EWI\",\"EGPT\",\"EWP\",\"EIRL\",\"EWG\",\"EWQ\",\"EWN\",\"EWK\",\"EIS\",\"EWL\",\"ARGT\",\"PLND\",\"EWU\",\"EWO\",\"EWY\",\"EWT\")    #TMW\ncurrencies <- c(\"FXB\",\"FXF\",\"FXE\",\"UUP\",\"FXS\",\"CYB\",\"ICN\",\"FXY\",\"FXC\",\"FXA\",\"BZF\")   #, SZR\nsectors_US <- c(\"XLI\",\"XLV\",\"XLB\",\"XLY\",\"XLK\",\"XLF\",\"XLE\",\"XLP\",\"XLU\")\nleveragedETFs <- c(\"TNA\",\"SSO\",\"UPRO\",\"FAS\",\"QLD\",\"ERX\",\"UWM\",\"AGQ\",\"DDM\",\"UST\",\"VIX\")\ncurrentHoldings <- c(\"AUY\",\"XLK\",\"INTU\")\nstocklist <- c(keyMarkets_US,\n               tech,\n               keyMarkets_Global,\n               keyMarkets_Bonds,\n               keyMarkets_Commodities,\n               keyMarkets_Currencies,\n               agriculture,\n               metals,\n               countries,\n               currencies,\n               sectors_US,\n               leveragedETFs,\n               currentHoldings)\n#stocklist <- c(leveragedETFs, currentHoldings)\nstocklist <- stocklist[!duplicated(stocklist)]  # remove duplicates\n\n#stocklist<-c(\"FB\",\"AUY\",\"XLK\")\n# Use the quantmod function to get all of the stock data properly.\ngetSymbols(stocklist,src=\"yahoo\", warnings = FALSE)\n",
+    "created" : 1397683615389.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3141693614",
+    "id" : "F2AAE368",
+    "lastKnownWriteTime" : 1398721284,
+    "path" : "~/GitHub/quantstuff/quantProject/StockAnalysis_LoadData.R",
+    "project_path" : "StockAnalysis_LoadData.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

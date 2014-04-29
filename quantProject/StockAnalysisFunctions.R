@@ -126,7 +126,7 @@ names(lastRow) <- c("stock", "Open","High","Low","Close","Volume","Adjusted","BB
 lastRow$buysell <- ifelse(lastRow$BBand_pctB > 0 & lastRow$RSI > 60,"SELL",
                           ifelse(lastRow$BBand_pctB < 0 & lastRow$RSI < 40,"BUY","-"))
 
-lastRow <- subset(lastRow, buysell != "-")
+#lastRow <- subset(lastRow, buysell != "-")
 
 return(lastRow)
 }

@@ -1,0 +1,16 @@
+{
+    "contents" : "### Stock Analysis\n\nsetwd(\"~/GitHub/quantstuff/quantProject\")\n\nlibrary(quantmod)\nsource(file=\"StockAnalysisFunctions.R\")\n######################################################################################\n############# SCAN ALL STOCKS ########################################################\n\nscanned <- scanner(stocklist)\nwrite.csv(scanned,\"TodaysPicks.csv\")\n##### how to include today's current values as part of the scan?\n\n############# GET STOCK DETAILS ########################################################\nmySymbol <- \"XLU\"\ndays <- 60\nmyStock <- eval(parse(text=mySymbol))\ntail(myStock)\n\n#chartSeries(last(ERX,60))\n############# CHART THE SELECTED STOCK ########################################################\ngetChart(mySymbol,days,myStock)\naddEMA(n=3)\naddEMA(n=30)\naddBBands()\naddRSI()\n\n#AAPL.OPT <- getOptionChain(\"AAPL\")\n#needs work: addPoints(Cl(last(myStock,days)),pch=25,col='red',offset=1.03)\n\n# \n# addTA(thisStock$BBand_pctB)\n# addTA(thisStock$PPO)\n\n\n#addATR()\n#addMomentum()\n#tail((EMA(Cl(stockData), n=3) - EMA(Cl(stockData), n=30))/EMA(Cl(stockData), n=30), n=30)\n",
+    "created" : 1397683804658.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "865664140",
+    "id" : "D2BD17FD",
+    "lastKnownWriteTime" : 1398782583,
+    "path" : "~/GitHub/quantstuff/quantProject/StockAnalysis.R",
+    "project_path" : "StockAnalysis.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
