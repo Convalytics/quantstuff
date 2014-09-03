@@ -48,6 +48,7 @@ getSignals <- function(sym,rng,dta){
    stockData$EMA30 <- EMA(Ad(stockData), n=30)$Adjusted.EMA.30
    stockData$EMADiff <- (stockData$EMA3 - stockData$EMA30) / stockData$EMA30
    stockData$mySignal <- (((stockData$RSI - 50)*3) + ((stockData$BBand_pctB - .5)*100)) /4 + (stockData$EMADiff * 100)
+   stockData$mySignal <- (stockData$mySignal + 100) / 2
    stockData$stopPct <- ((stockData$ATR * 2) / Ad(stockData)) * 100
    return(stockData)
    

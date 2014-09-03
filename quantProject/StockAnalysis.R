@@ -12,7 +12,7 @@ write.csv(scanned,"TodaysPicks.csv")
 ##### how to include today's current values as part of the scan?
 
 ############# GET STOCK DETAILS ########################################################
-mySymbol <- "JO"
+mySymbol <- "GLD"
 days <- 60
 myStock <- eval(parse(text=mySymbol))
 tail(myStock)
