@@ -23,7 +23,7 @@ metals <- c("JJT","JJN","LD","JJU","JJC","GLD","SLV","PALL","PPLT","JJM","WITE")
 countries <- c("EWI","EGPT","EWP","EIRL","EWG","EWQ","EWN","EWK","EIS","EWL","ARGT","PLND","EWU","EWO","EWY","EWT")    #TMW
 currencies <- c("FXB","FXF","FXE","UUP","FXS","CYB","ICN","FXY","FXC","FXA","BZF")   #, SZR
 sectors_US <- c("XLI","XLV","XLB","XLY","XLK","XLF","XLE","XLP","XLU")
-leveragedETFs <- c("TNA","SSO","UPRO","FAS","QLD","ERX","UWM","AGQ","DDM","UST","VIX")
+leveragedETFs <- c("TNA","SSO","UPRO","FAS","QLD","ERX","UWM","AGQ","DDM","UST")
 currentHoldings <- c("AUY","XLK","INTU")
 stocklist <- c(keyMarkets_US,
                tech,
