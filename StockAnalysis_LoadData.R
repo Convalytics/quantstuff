@@ -2,8 +2,8 @@
 
 setwd("~/GitHub/quantstuff")
 
-library(quantmod)
-
+require(quantmod)
+require(quantstuff)
 ######################################################################################
 
 tech<-c("XLK","AAPL","MSFT","VZ","IBM","ORCL","QCOM","CSCO","INTC","V","FB",
@@ -25,18 +25,18 @@ currencies <- c("FXB","FXF","FXE","UUP","FXS","CYB","ICN","FXY","FXC","FXA","BZF
 sectors_US <- c("XLI","XLV","XLB","XLY","XLK","XLF","XLE","XLP","XLU")
 leveragedETFs <- c("TNA","SSO","UPRO","FAS","QLD","ERX","UWM","AGQ","DDM","UST","VIX")
 
-stocklist <- c(keyMarkets_US,
-               tech,
-               keyMarkets_Global,
-               keyMarkets_Bonds,
+stocklist <- c(#keyMarkets_US,
+               #tech,
+               #keyMarkets_Global,
+               #keyMarkets_Bonds,
                keyMarkets_Commodities,
-               keyMarkets_Currencies,
-               agriculture,
-               metals,
-               countries,
-               currencies,
-               sectors_US,
-               leveragedETFs)
+               keyMarkets_Currencies)
+               #agriculture,
+               #metals,
+               #countries,
+               #currencies,
+               #sectors_US,
+               #leveragedETFs)
 
 stocklist <- stocklist[!duplicated(stocklist)]  # remove duplicates
 

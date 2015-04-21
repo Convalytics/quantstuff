@@ -3,17 +3,18 @@
 setwd("~/GitHub/quantstuff/quantProject")
 
 library(quantmod)
-source(file="StockAnalysisFunctions.R")
+#source(file="StockAnalysisFunctions.R")
+require(quantstuff)
 ######################################################################################
 ############# SCAN ALL STOCKS ########################################################
 
 scanned <- bbscan(stocklist)
 subset(scanned, signal!="-")
-
+head(scanned)
 
 ############# GET STOCK DETAILS ########################################################
-mySymbol <- "OIL"
-days <- 120
+mySymbol <- "UUP"
+days <- 30
 myStock <- eval(parse(text=mySymbol))
 
 

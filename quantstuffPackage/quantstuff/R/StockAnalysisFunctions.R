@@ -2,9 +2,11 @@
 # 
 # setwd("~/GitHub/quantstuff")
 # 
-# library(quantmod)
+require(quantmod)
 
 ######################################################################################
+#' PPO Function
+#' 
 PPO <- function(x) {
    x$ppo <- ((EMA(Ad(x),12) - EMA(Ad(x),26)) / EMA(Ad(x),26)) * 100
    x$signal <- EMA(x$ppo,9)
@@ -16,6 +18,8 @@ PPO <- function(x) {
 ####################################################################################
 
 #Guppy Multiple Moving Average
+#' Guppy Multiple Moving Average (GMMA)
+#' 
 GMMA <- function(x) {
    fastMA <- c(3,5,8,10,12,15)
    slowMA <- c(30,35,40,45,50,60)
@@ -25,7 +29,8 @@ GMMA <- function(x) {
 }
 
 ################################################
-
+#' Add Guppy
+#' 
 addGuppy <- newTA(FUN=GMMA,
                   preFUN=Cl,
                   col=c(rep(3,6),
@@ -33,7 +38,8 @@ addGuppy <- newTA(FUN=GMMA,
                   legend="GMMA")
 
 ######################################################################
-
+#' Get Signals
+#' 
 getSignals <- function(sym,rng,dta){
    mySymbol <- toupper(sym)
    dayRange <- as.numeric(rng)
@@ -54,6 +60,7 @@ getSignals <- function(sym,rng,dta){
 }
 
 ##### Chart  #################################################
+#' Get Chart Function
 getChart <- function(sym,rng,dta){
    mySymbol <- toupper(sym)
    dayRange <- as.numeric(rng)
@@ -71,7 +78,7 @@ getChart <- function(sym,rng,dta){
 }
 
 #########################################################################
-
+#' bbandscanner
 bbandScanner <- function(a){
    
    mySymbol <- toupper(a)
@@ -90,6 +97,7 @@ bbandScanner <- function(a){
 ########################################################
 
 #### bbscan function ###############################################
+#' bbscan function
 bbscan <- function(stocklist){
    
    signalList <- as.data.frame(matrix(NA,nrow=0,ncol=5))

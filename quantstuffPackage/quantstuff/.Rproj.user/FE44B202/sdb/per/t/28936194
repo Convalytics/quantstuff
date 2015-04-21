@@ -1,0 +1,16 @@
+{
+    "contents" : "### Stock Analysis\n\nsetwd(\"~/GitHub/quantstuff/quantProject\")\n\nlibrary(quantmod)\n#source(file=\"StockAnalysisFunctions.R\")\nrequire(quantstuff)\n######################################################################################\n############# SCAN ALL STOCKS ########################################################\n\nscanned <- bbscan(stocklist)\nsubset(scanned, signal!=\"-\")\nhead(scanned)\n\n############# GET STOCK DETAILS ########################################################\nmySymbol <- \"UUP\"\ndays <- 30\nmyStock <- eval(parse(text=mySymbol))\n\n\nthisStock <- getSignals(mySymbol, days, myStock)\ntail(thisStock)\n\n############# CHART THE SELECTED STOCK ########################################################\ngetChart(mySymbol,days,thisStock)\naddEMA(n=3)\naddEMA(n=30)\naddBBands()\n\naddRSI()\naddTA(thisStock$BBand_pctB)\naddTA(thisStock$PPO)\n#addATR()\n#addMomentum()\n#tail((EMA(Cl(stockData), n=3) - EMA(Cl(stockData), n=30))/EMA(Cl(stockData), n=30), n=30)\n",
+    "created" : 1424405287273.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1005728496",
+    "id" : "28936194",
+    "lastKnownWriteTime" : 1424406386,
+    "path" : "~/GitHub/quantstuff/StockAnalysis.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
