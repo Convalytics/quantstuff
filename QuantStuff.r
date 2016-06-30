@@ -3,13 +3,13 @@ library('quantmod')
 #library('xts')
 #library('PerformanceAnalytics')
 
-techSector <- c("XLK","AAPL","GOOG","MSFT","VZ","IBM","T","ORCL","QCOM","CSCO","INTC","V","FB","MA","EBAY","EMC","TXN","ACN","HPQ","ADP","YHOO","CRM")
+techSector <- c("XLK","AAPL","GOOG") #,"MSFT","VZ","IBM","T","ORCL","QCOM","CSCO","INTC","V","FB","MA","EBAY","EMC","TXN","ACN","HPQ","ADP","YHOO","CRM")
 #loadSymbols <- c("XPH","XBI","IHF","IHI","JO","MSFT")
 
 getSymbols(techSector,src="yahoo")
 
-mySymbol <- AUY
-dayRange <- 90
+mySymbol <- XLK
+dayRange <- 500
 
 #candleChart(last(mySymbol,dayRange),dn.col="black",up.col="white",theme="white")
 chartSeries(last(mySymbol,dayRange),
@@ -23,14 +23,15 @@ chartSeries(last(mySymbol,dayRange),
 addBBands()
 addMACD()
 
-chartStock("XLK","90")
+#chartStock("XLK","90")
+getChart("XLK",500,XLK)
 #My Indicators
 # not used: addTA(LoHi(last(mySymbol,dayRange)))
-#Absolute daysBody <- abs(AUY$AUY.Close - AUY$AUY.Open)  # Body Size
-daysBody <- AUY$AUY.Close - AUY$AUY.Open  # Body Size
-daysRange <- AUY$AUY.High - AUY$AUY.Low   # Low to High
-daysUpShadow <- ifelse(AUY$AUY.Close > AUY$AUY.Open, AUY$AUY.High - AUY$AUY.Close, AUY$AUY.High - AUY$AUY.Open)      # Upper Shadow Size
-daysLoShadow <- ifelse(AUY$AUY.Close > AUY$AUY.Open, AUY$AUY.Open - AUY$AUY.Low, AUY$AUY.Close - AUY$AUY.Low)     # Lower Shadow Size
+#Absolute daysBody <- abs(XLK$XLK.Close - XLK$XLK.Open)  # Body Size
+daysBody <- XLK$XLK.Close - XLK$XLK.Open  # Body Size
+daysRange <- XLK$XLK.High - XLK$XLK.Low   # Low to High
+daysUpShadow <- ifelse(XLK$XLK.Close > XLK$XLK.Open, XLK$XLK.High - XLK$XLK.Close, XLK$XLK.High - XLK$XLK.Open)      # Upper Shadow Size
+daysLoShadow <- ifelse(XLK$XLK.Close > XLK$XLK.Open, XLK$XLK.Open - XLK$XLK.Low, XLK$XLK.Close - XLK$XLK.Low)     # Lower Shadow Size
 daySummary <- daysBody + daysRange + daysUpShadow + daysLoShadow
 addTA(last(daysBody,dayRange), col="blue", overlay=TRUE)
 addTA(last(daysRange,dayRange), col="brown")

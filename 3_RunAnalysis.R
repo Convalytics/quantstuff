@@ -13,7 +13,7 @@ write.csv(scanned,"TodaysPicks.csv")
 
 ############# GET STOCK DETAILS ########################################################
 mySymbol <- "PAYX"
-days <- 250
+days <- 90
 myStock <- eval(parse(text=mySymbol))
 #tail(myStock)
 #last(PAYX,10)

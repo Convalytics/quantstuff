@@ -152,14 +152,71 @@ addStockData <- function(stockDF){
   names(stockDF) <- c("Date","Op","Hi","Lo","Clo","Vol","Adj","Body_Pct","ClCl_Pct","GAP_Pct","MaxProfit_1d_Pct","AvgProfit_1d_Pct")
   stockDF$Body_Color[stockDF$Body_Pct >= 0] <- 'Green'
   stockDF$Body_Color[stockDF$Body_Pct < 0] <- 'Red'
-  #stockDF$UpShadow[stockDF$Body_Color == 'Green'] <- stockDF$Hi - stockDF$Clo
+  
+  # Up Shadow
   stockDF$UpShadow_Pct[stockDF$Body_Color=='Green'] <- (stockDF$Hi[stockDF$Body_Color=='Green'] - stockDF$Clo[stockDF$Body_Color=='Green']) / stockDF$Clo[stockDF$Body_Color=='Green']
   stockDF$UpShadow_Pct[stockDF$Body_Color=='Red'] <- (stockDF$Hi[stockDF$Body_Color=='Red'] - stockDF$Op[stockDF$Body_Color=='Red']) / stockDF$Op[stockDF$Body_Color=='Red']
   
+  # Down Shadow
   stockDF$DownShadow_Pct[stockDF$Body_Color=='Green'] <- (stockDF$Op[stockDF$Body_Color=='Green'] - stockDF$Lo[stockDF$Body_Color=='Green']) / stockDF$Op[stockDF$Body_Color=='Green']
   stockDF$DownShadow_Pct[stockDF$Body_Color=='Red'] <- (stockDF$Clo[stockDF$Body_Color=='Red'] - stockDF$Lo[stockDF$Body_Color=='Red']) / stockDF$Clo[stockDF$Body_Color=='Red']
   
+  # Days Range Hi-Lo
+  stockDF$DayRange_Pct <- (stockDF$Hi-stockDF$Lo)/stockDF$Op
   
   
   return(stockDF)
 }
+# DEV ###########################################
+testStock <- addStockData(SPY)
+tail(testStock)
+qxts <- as.xts(xts(testStock[,-1], order.by=testStock[,1]))
+
+chartSeries(last(qxts,90),
+            type="candlesticks",
+            name="test",
+            theme=chartTheme("white"),
+            up.col="white",
+            dn.col="black",
+            grid.col="gray"         
+)
+#############################################
+
+#############
+###########
+#########
+addStockData2 <- function(stockDF){
+  
+  #head(stockDF)
+  #stockDF$Change_AdjYest <- Delt(stockDF$Adjusted, k=1)
+  stockDF$Body_Pct <- OpCl(stockDF)
+  stockDF$ClCl_Pct <- ClCl(stockDF)
+  stockDF$GAP_Pct <- (Op(stockDF) - Lag(Cl(stockDF),k=1)) / Lag(Cl(stockDF),k=1)  # Gap from yesterday's close to today's open.
+  stockDF$MaxProfit_1d_Pct <- (as.numeric(Next(Hi(stockDF),k=1))  - Cl(stockDF)) / Cl(stockDF)
+  stockDF$AvgProfit_1d_Pct <- (((as.numeric(Next(Hi(stockDF),k=1))+as.numeric(Next(Lo(stockDF),k=1))) / 2 )  - Cl(stockDF)) / Cl(stockDF)
+  
+  stockDF <- fortify(stockDF)
+  names(stockDF) <- c("Date","Op","Hi","Lo","Clo","Vol","Adj","Body_Pct","ClCl_Pct","GAP_Pct","MaxProfit_1d_Pct","AvgProfit_1d_Pct")
+  stockDF$Body_Color[stockDF$Body_Pct >= 0] <- 'Green'
+  stockDF$Body_Color[stockDF$Body_Pct < 0] <- 'Red'
+  
+  # Up Shadow
+  stockDF$UpShadow_Pct[stockDF$Body_Color=='Green'] <- (stockDF$Hi[stockDF$Body_Color=='Green'] - stockDF$Clo[stockDF$Body_Color=='Green']) / stockDF$Clo[stockDF$Body_Color=='Green']
+  stockDF$UpShadow_Pct[stockDF$Body_Color=='Red'] <- (stockDF$Hi[stockDF$Body_Color=='Red'] - stockDF$Op[stockDF$Body_Color=='Red']) / stockDF$Op[stockDF$Body_Color=='Red']
+  
+  # Down Shadow
+  stockDF$DownShadow_Pct[stockDF$Body_Color=='Green'] <- (stockDF$Op[stockDF$Body_Color=='Green'] - stockDF$Lo[stockDF$Body_Color=='Green']) / stockDF$Op[stockDF$Body_Color=='Green']
+  stockDF$DownShadow_Pct[stockDF$Body_Color=='Red'] <- (stockDF$Clo[stockDF$Body_Color=='Red'] - stockDF$Lo[stockDF$Body_Color=='Red']) / stockDF$Clo[stockDF$Body_Color=='Red']
+  
+  # Days Range Hi-Lo
+  stockDF$DayRange_Pct <- (stockDF$Hi-stockDF$Lo)/stockDF$Op
+  
+  
+  return(stockDF)
+}
+# DEV ###########################################
+testStock <- addStockData(SPY)
+tail(testStock)
+testOption <- getOptionChain("PAYX","20160916")
+testOption['puts']
+#qxts <- as.xts(xts(testStock[,-1], order.by=testStock[,1]))

@@ -7,7 +7,7 @@ setwd("~/GitHub/quantstuff")
 
 library(quantmod)
 #library(gridExtra)
-#library(ggplot2)
+library(ggplot2)
 #library(dplyr)
 ######################################################################################
 
@@ -50,7 +50,7 @@ favorites <- c("USO","SPY","UUP","TLT","QQQ","GLD")
 #stocklist<-c("USO","SPY","UUP")
 # Use the quantmod function to get all of the stock data properly.
 
-stocklist <- c(currentHoldings)#, favorites, liquidETFs, keyMarkets_US, currencies, sectors_US)
+stocklist <- c(currentHoldings, favorites) #, liquidETFs, keyMarkets_US, currencies, sectors_US)
 stocklist <- stocklist[!duplicated(stocklist)]  # remove duplicates
 getSymbols(stocklist,src="yahoo", warnings = FALSE)
 #getQuote("GLD")
